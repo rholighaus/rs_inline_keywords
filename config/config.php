@@ -13,7 +13,7 @@
 # $sample_favorite_pet_living = -1;   // Boolean specifying whether favorite pet is alive or not
 
 $inline_keywords_usertype = 'a';
-$inline_keywords_background_colour = 'hotPink';
+$inline_keywords_background_colour = '#1990E7';
 $inline_keywords_use_jQuery_ui = True;
 $inline_keywords_use_legacy_jQuery = True;
 $inline_keywords_clear_fields_on_submit = True;

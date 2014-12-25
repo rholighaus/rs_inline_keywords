@@ -1,12 +1,29 @@
 <?php
-    function HookInline_keywordsAllAdditionalheaderjs()
-        {
+
+function HookInline_keywordsAllAdditionalheaderjs()
+    {
         global $baseurl, $inline_keywords_usertype, $inline_keywords_background_colour, $inline_keywords_clear_fields_on_submit, $inline_keywords_sticky_panel;
-    if(checkperm($inline_keywords_usertype))
+        if(checkperm($inline_keywords_usertype))
         { ?>
             <script type='text/javascript'>
-                jQuery(window).load(function() {
-		    console.dir(jQuery('body'));
+                jQuery(document).ready(function() {
+		            // console.dir(jQuery('body'));
+
+///////////                    
+                    //jQuery(document).live('click',function() {
+                    jQuery(document).ajaxStop(function() {
+                        // get the contents of the link that was clicked
+                        //var linkText = jQuery(this).text();
+                        if (window.location.href.indexOf("search.php") ==-1) 
+                        {                        
+                            jQuery('.keywordPanel').css('display','none');
+                        }
+                        
+                        // cancel the default action of the link by returning false
+                        //return false;
+                    });
+//////////////
+
                     jQuery('form#manipulateKeywords label').each(function(){
                         if(jQuery(this).siblings(':text').val()!==""){
                             this.hide();
@@ -43,6 +60,7 @@
                             jQuery('.chosen .ResourcePanelLarge, .chosen .ResourcePanel, .chosen .ResourcePanelSmall').css('border-color','<?php echo $inline_keywords_background_colour; ?>');
                         }
                     });
+                    
                     
                     jQuery('body').on('click', '#clearSelectedResourceButton', function() {
 
@@ -84,10 +102,11 @@
                             data: 'refs=' + resourceIds + '&' + form_values 
                         }).done(function( msg ) {
                             if(msg !== ''){alert( "Data Saved: " + msg );}
+                            location.reload(true);
                             //jQuery(".keywordPanel").effect("highlight", {}, 3000);
-                            jQuery(".keywordPanel").fadeTo("slow", 0.5, function () {
-                                jQuery(".keywordPanel").fadeTo("slow", 1.0, function(){});
-                            });
+                            //jQuery(".keywordPanel").fadeTo("slow", 0.5, function () {
+                            //jQuery(".keywordPanel").fadeTo("slow", 1.0, function(){});
+                            //});
                             <?php if($inline_keywords_clear_fields_on_submit){
                                 echo "jQuery('form#manipulateKeywords :text').val('');jQuery('form#manipulateKeywords label').show();";
                             }?>
@@ -95,7 +114,9 @@
                     });
                 });
             </script>
-        <?php }
+        <?php   }
     return true;
-    }
+ }
+
+    
 ?>

@@ -5,7 +5,8 @@
 
 $lang['selectall'] = 'Select All';
 $lang['unselectall'] = 'Unselect All';
-$lang['editfields'] = 'Update Resource';
+$lang['editfields'] = 'Update resource';
+$lang['appendresources'] = 'append';
 $lang['submitchanges'] = 'Submit Changes';
 $lang['keywordstoresource'] = 'Change fields on selected resources.';
 $lang['inline_keywords_clear_fields_on_submit'] = "Clear fields after submitting.";

@@ -1,6 +1,19 @@
 <?php
-    function HookInline_keywordsSearchSearchbarbottomtoolbar()
+    function HookInline_keywordsSearchAdditionalheaderjs()
     {
+        ?>
+            <script type='text/javascript'>
+                jQuery(document).ready(function() {
+                    //jQuery(".keywordPanel").css('display','block');
+                });
+            </script>
+                
+        <?php
+        return true;
+  }
+
+  function HookInline_keywordsSearchSearchbarbottomtoolbar()
+  {
         global $lang, $inline_keywords_usertype, $inline_keywords_editable_fields;
         if(checkperm($inline_keywords_usertype))
             {
@@ -13,7 +26,7 @@
                 <form id="manipulateKeywords">
                   <span class="wrap">
 					<?php
-				foreach($inline_keywords_editable_fields as $field)
+				foreach(array_reverse($inline_keywords_editable_fields) as $field)
 					{
 					$label_result = sql_query("select title from resource_type_field where ref = '$field'");
 					$label = ($label_result[0]['title']);
@@ -24,14 +37,15 @@
                     echo "</p>";
 					} ?>
                   </span>
-                  <input type="button" id="selectAllResourceButton" value="<?php echo $lang["selectall"]; ?>">
-                  <input type="button" id="clearSelectedResourceButton" value="<?php echo $lang["unselectall"]; ?>">
+                  <!--<input type="button" id="selectAllResourceButton" value="<?php echo $lang["selectall"]; ?>">
+                  <input type="button" id="clearSelectedResourceButton" value="<?php echo $lang["unselectall"]; ?>">-->
+                  <input type="checkbox" checked="checked" id="appendResourcesButton" name="append" value="append"><?php echo $lang["appendresources"]; ?>
                   <input type="button" id="submitSelectedResourceButton" value="<?php echo $lang["submitchanges"]; ?>">
                   <input type="button" id="archiveResourcesButton" value="<?php echo $lang["archiveresources"]; ?>">
                 </form>
               </div>
             </div>
-            <?php
-        }
+        <?php }
     }
+
 ?>

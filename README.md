@@ -15,4 +15,4 @@ Current version:
 + removed custom sql and used resourcespace's own update functionality
 + corrected array/comma explodes (as far as I know ;)
 + added logging of changes
-  
++ added posibility for append or overwriting previous data
